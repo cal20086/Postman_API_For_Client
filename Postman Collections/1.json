@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "00b98358-9557-4a8e-b5ef-db8ded9af754",
+		"name": "REST API - Available for Client - For Asset - Insert New Assets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Insert New Asset",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ef09eff1-64e7-4b5e-81f2-cad1f4c8d736",
+						"exec": [
+							"let counter233 = pm.environment.get('counter233');\r",
+							"if (typeof(counter233) === 'string'){\r",
+							"    counter233 = Number.parseInt(counter233);\r",
+							"}\r",
+							"\r",
+							"let Number233 = \"QA_\" + counter233;\r",
+							"pm.environment.set('Number233', Number233);\r",
+							"\r",
+							"counter233 = counter233 + 100000000000 \r",
+							"let VIN233 = \"QAVIN\" + counter233;\r",
+							"pm.environment.set('VIN233', VIN233);\r",
+							"\r",
+							"counter233 = counter233 - 100000000000\r",
+							"\r",
+							"pm.environment.set('counter233', counter233 + 1);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "631efb25-eced-472d-bd51-837a39be2482",
+						"exec": [
+							"// Test\r",
+							"tests[\"check status in code\"]= responseCode.code==200;\r",
+							"tests[\"check status in the response\"]=responseBody.has(1)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "6d26c5a3-2f52-46f0-96e3-a70623fa29f9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"HOSClientApiKey\":\"{{QACarrier_ApiKey}}\",\r\n    \"Asset\":\r\n            {\r\n            \"AssetId\": ,\r\n            \"Number\": \"{{Number233}}\",\r\n            \"VIN\": \"{{VIN233}}\",\r\n            \"Plate\": \"TEST20220\",\r\n            \"RegistrationState\": \"FL\",\r\n            \"Description\": \"Truck Description\",\r\n            \"Type\": 1,\r\n            \"ECMId\": \"18:65:43:21:63:21\",\r\n            \"AdditionalECMId\": \"18:65:43:21:63:23\",\r\n            \"Active\" : 1,\r\n            \"HOSHomeBaseId\": {{QAHomeBaseUpdate_QACarrier_HomeBaseId}},\r\n            \"FuelTypeId\": 2,\r\n            }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{apolloRESTAPI_HOSAssets_base_url}}/InsertHOSAssetForClient"
+			},
+			"response": []
+		}
+	]
+}
